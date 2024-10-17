@@ -43,6 +43,7 @@ export const getPayloadClient = async ({
   }
 
   if (!cached.promise) {
+    //@ts-expect-error
     cached.promise = payload.init({
       email: {
         transport: transporter,
