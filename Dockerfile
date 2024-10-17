@@ -10,6 +10,11 @@ COPY package*.json ./
 # Install dependencies with --force option
 RUN npm i --force
 
+# Copy tsconfig.server.json if it exists in root or src
+COPY tsconfig.server.json ./
+# If it's inside src, use:
+# COPY ./src/tsconfig.server.json ./
+
 # Copy the rest of your application files, including the src directory
 COPY ./src ./src
 
@@ -20,7 +25,7 @@ WORKDIR /app/src/app
 RUN npm run build
 
 # Expose the port Next.js will run on
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the application
 CMD ["npm", "run", "start"]
